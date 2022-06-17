@@ -1,0 +1,99 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f9f9f9;
+}
+
+.navbar {
+    background-color: #1ea8e7;
+    height: 4.5rem;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 0 40px 0 40px;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.bi-check2-square {
+    color: white;
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+
+/*********************************/
+
+.card-bottom,
+.check-box,
+.card-dots {
+    cursor: pointer;
+}
+
+.check-box {
+    width: 22px;
+    height: 22px;
+}
+
+.card-dots {
+    font-size: 20px;
+}
+
+.card {
+    border-radius: 1.25rem !important;
+    max-width: 400px !important;
+}
+
+
+/*****************************/
+
+.tag-project,
+.tag-personal,
+.tag-urgent,
+.tag-list {
+    padding: 0.3rem;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.tag-project {
+    border: 0.5px solid #1ea8e7;
+    color: #1ea8e7;
+}
+
+.tag-personal {
+    border: 1px solid #ebb71a;
+    color: #ebb71a;
+}
+
+.tag-urgent {
+    border: 1px solid #771a23;
+    color: #771a23;
+}
+
+.tag-list {
+    border: 1px solid #439b38;
+    color: #439b38;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: darkgray;
+    border-color: darkgray;
+}
+
+
+/***************************/
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.25s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
