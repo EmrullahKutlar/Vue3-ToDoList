@@ -47,7 +47,7 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="btn btn-outline-success" type="button">New Task</button>
+        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#newTask">New Task</button>
       </li>
     </ul>
   </div>
@@ -58,6 +58,7 @@
         </transition>
     </div>
   </div>
+  <new-task/>
 </template>
 
 <script>
@@ -65,11 +66,13 @@ import AllTasks from "./AllTasks.vue"
 import ActiveTasks from "./ActiveTasks.vue"
 import DonedTasks from "./DonedTasks.vue"
 import { ref } from "vue";
+import NewTask from './NewTask.vue';
 export default {
     components:{
         AllTasks,
         ActiveTasks,
-        DonedTasks
+        DonedTasks,
+        NewTask
     },
   setup() {
     const activeTab=ref("AllTasks");
