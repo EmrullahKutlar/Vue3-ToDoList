@@ -49,6 +49,10 @@ body {
 
 /*****************************/
 
+.title-color {
+    color: #0d6efd;
+}
+
 .tag-project,
 .tag-personal,
 .tag-urgent,
@@ -81,7 +85,7 @@ body {
 
 .completed {
     text-decoration: line-through;
-    color: darkgray;
+    color: darkgray !important;
     border-color: darkgray;
 }
 

@@ -4,7 +4,19 @@
     id="pills-all"
     role="tabpanel"
   >
-    <div class="card mb-4 me-3" v-for="item in allTasks" :key="item">
+    <div
+      class="alert alert-warning w-100"
+      role="alert"
+      v-if="allTasks.length <= 0"
+    >
+      There is no tasks yet.
+    </div>
+    <div
+      class="card mb-4 me-3"
+      v-else
+      v-for="(item, index) in allTasks"
+      :key="index"
+    >
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
           <input
@@ -15,8 +27,10 @@
             @click="makeDone(item)"
             :checked="item.isDone"
           />
-          <h5 class="card-title" :class="{ completed: item.isDone }">
-            {{ item.title }}
+          <h5 class="card-title d-flex justify-content-between">
+            <span class="title-color" :class="{ completed: item.isDone }"
+              >({{ index + 1 }}) - {{ item.title }}</span
+            >
           </h5>
 
           <div class="dropdown">
@@ -59,8 +73,8 @@
 
 <script>
 import { ref, onMounted } from "vue";
-import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
-import { db } from "@/firebase";
+import { db, makeDone2 } from "@/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 export default {
   setup() {
     const checked = ref(false);
@@ -80,11 +94,8 @@ export default {
       });
     };
 
-    const makeDone =  (task) => {
-      var selectedTask =doc(db, "tasks", task.id);
-      updateDoc(selectedTask, {
-        isDone: !task.isDone,
-      });
+    const makeDone = (task) => {
+      makeDone2(task);
     };
 
     onMounted(() => {
@@ -94,7 +105,7 @@ export default {
     return {
       checked,
       allTasks,
-      makeDone
+      makeDone,
     };
   },
 };

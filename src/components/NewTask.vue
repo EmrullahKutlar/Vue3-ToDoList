@@ -62,8 +62,7 @@
 
 <script>
 import { reactive } from "vue";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "@/firebase";
+import {addTask} from "@/firebase";
 
 export default {
   setup() {
@@ -72,11 +71,10 @@ export default {
       description: "",
       isDone: false,
     });
+
     const onSubmit = async () => {
       if(taskDetails.title.length >0 && taskDetails.description.length >0){
-       await addDoc(collection(db, "tasks"), {
-        ...taskDetails,
-      });
+        addTask({...taskDetails})
       taskDetails.title = "";
       taskDetails.description = "";
       taskDetails.isDone = false;
@@ -84,13 +82,8 @@ export default {
       else{
         alert("Please fill all the fields");
       }
-      // await addDoc(collection(db, "tasks"), {
-      //   ...taskDetails,
-      // });
-      // taskDetails.title = "";
-      // taskDetails.description = "";
-      // taskDetails.isDone = false;
     };
+    
     return {
       onSubmit,
       taskDetails,
