@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { ref } from "vue";
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyBfkcYR9knX0iJR6LQEuc3PvxJ1E-0L8gM",
     authDomain: "vue3-todo-database.firebaseapp.com",
@@ -15,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-import { collection, addDoc, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, updateDoc,deleteDoc  } from "firebase/firestore";
 
 
 export const addTask = (task) => {
@@ -38,11 +39,33 @@ export const addTask = (task) => {
 //     console.log(tasks);
 //     return tasks;
 // }
-export const makeDone2 = (task) => {
+export const makeDone = (task) => {
     var selectedTask = doc(db, "tasks", task.id);
     updateDoc(selectedTask, {
         isDone: !task.isDone,
     });
+}
+export const deleteTask = (task) => {
+    var selectedTask = doc(db, "tasks", task.id);
+    deleteDoc(selectedTask).then(() => {
+        console.log("Document successfully deleted!");
+    })
+    .catch((err) => {
+        console.log(err);
+    });;
+}
+export const editTask = (task) => {
+    var editTask = doc(db, "tasks", task.id);
+    updateDoc(editTask, {
+        title: task.title,
+        description: task.description,
+        isDone: task.isDone,
+    }).then(() => {
+        console.log("Document successfully updated!");
+    })
+    .catch((err) => {
+        console.log(err);
+    });;
 }
 
 export { db };

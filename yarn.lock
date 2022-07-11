@@ -551,6 +551,11 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.37.tgz#8e6adc3f2759af52f0e85863dfb0b711ecc5c702"
   integrity sha512-4rSJemR2NQIo9Klm1vabqWjD8rs/ZaJSzMxkMNeJS6lHiUjjUeYFbooN19NgFjztubEKh3WlZUeOLVdbbUWHsw==
 
+"@vueform/multiselect@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@vueform/multiselect/-/multiselect-2.4.2.tgz#580a7f84f1eb8c5b2c9d4ac26c54c57f748b815b"
+  integrity sha512-5VVk4Mwn4cva+MbBjAXaEunmGWLAp98PcI4okaT95qYCfBckn2N/9ws18O0OStVe8WskFFUj/kF0goH/Xc2aTw==
+
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"

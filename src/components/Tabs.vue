@@ -53,9 +53,9 @@
   </div>
   <div class="container d-flex justify-content-center mt-3">
     <div class="tab-content" id="pills-tabContent">
-        <transition name="fade" mode="out-in">
+        <!-- <transition name="fade" mode="out-in"> -->
         <component :is="activeTab"/>
-        </transition>
+        <!-- </transition> -->
     </div>
   </div>
   <new-task/>
@@ -72,7 +72,7 @@ export default {
         AllTasks,
         ActiveTasks,
         DonedTasks,
-        NewTask
+        NewTask,
     },
   setup() {
     const activeTab=ref("AllTasks");
