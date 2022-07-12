@@ -116,11 +116,12 @@ export default {
       { key: "Urgent", value: "Urgent", label: "Urgent" },
       { key: "List", value: "List", label: "List" },
     ]);
-
+    const deneme=ref()
     return {
       Task,
       tagsOptions,
       onSubmit,
+      deneme
     };
   },
 };
