@@ -60,6 +60,7 @@ export const editTask = (task) => {
         title: task.title,
         description: task.description,
         isDone: task.isDone,
+        tags: task.tags,
     }).then(() => {
         console.log("Document successfully updated!");
     })

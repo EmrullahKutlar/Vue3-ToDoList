@@ -94,20 +94,23 @@ export default {
 
   setup(props) {
     const Task = computed(() => props.task);
-    const changedTask= ref({});
-    changedTask.value = Task.value;
+   
     
     const onSubmit = () => {
-      console.log(changedTask.value);
-      console.log(Task.value);
-      console.log("submit calıstı");
       var tagMap = Task.value.tags.reduce(function (map, obj) {
         map[obj.key] = obj.value;
         return map;
       }, {});
-      Task.tags = tagMap; // array to map for list them correctly
-      console.log(Task.value);
-      editTask(Task);
+      // array to map for list them correctly
+      var newTask={
+        id:Task.value.id,
+        title:Task.value.title,
+        description:Task.value.description,
+        isDone:Task.value.isDone,
+        tags:tagMap,
+      }
+      // we cant change the value of computed variable so we need to create a new one
+      editTask(newTask);
     };
 
     const tagsOptions = ref([
@@ -116,12 +119,10 @@ export default {
       { key: "Urgent", value: "Urgent", label: "Urgent" },
       { key: "List", value: "List", label: "List" },
     ]);
-    const deneme=ref()
     return {
       Task,
       tagsOptions,
       onSubmit,
-      deneme
     };
   },
 };
