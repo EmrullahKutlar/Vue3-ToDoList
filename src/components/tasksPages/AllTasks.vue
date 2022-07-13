@@ -65,7 +65,7 @@ export default {
     const allTasks = ref([]);
     const selectedTask = ref({});
 
-    const getAllTasks = async () => {
+    const getAllTasks =  () => {
 
       onSnapshot(query(collection(db, "tasks")), (querySnapshot) => {
         let tasks = [];
