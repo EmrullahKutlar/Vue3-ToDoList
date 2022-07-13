@@ -54,7 +54,7 @@
 <script>
 import { ref, onMounted } from "vue";
 import { db, makeDone, deleteTask } from "@/firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs,onSnapshot } from "firebase/firestore";
 import EditTask from "./EditTask.vue";
 export default {
   components: {
@@ -66,33 +66,29 @@ export default {
     const selectedTask = ref({});
 
     const getDonedTasks = async () => {
-      
-      const q = query(collection(db, "tasks"), where("isDone", "==", true));
 
-      const querySnapshot = await getDocs(q);
-      let tasks = [];
-      querySnapshot.forEach((doc) => {
-        const todo = {
-          id: doc.id,
-
-          ...doc.data(),
-        };
-        tasks.push(todo);
+       onSnapshot(query(collection(db, "tasks"), where("isDone", "==", true)), (querySnapshot) => {
+        let tasks = [];
+        querySnapshot.forEach((doc) => {
+          const todo = {
+            id: doc.id,
+            ...doc.data(),
+          };
+          tasks.push(todo);
+        });
+        donedTasks.value = tasks;
       });
-      donedTasks.value = tasks;
-      console.log(donedTasks.value);
     };
     const editTask = (e) => {
-      console.log(e.tags);
       const tagArry = ref([]);
       for (const [key, value] of Object.entries(e.tags)) {
         tagArry.value.push({ key, value, label: key });
       } //for multiselect component to work. Changing obj to array
       selectedTask.value = e;
       selectedTask.value.tags = tagArry.value
-      console.log(selectedTask.value);
       getDonedTasks(); // bcs of keep the tags map like in the begining 
     };
+    
     const makeDoneTask = (task) => {
       makeDone(task);
     };

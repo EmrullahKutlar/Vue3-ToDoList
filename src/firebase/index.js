@@ -24,21 +24,6 @@ export const addTask = (task) => {
             ...task,
         });
     }
-    // export const getTasks = () => {
-    //     const tasks = [];
-    //     onSnapshot(collection(db, "tasks"), (querySnapshot) => {
-    //         querySnapshot.forEach((doc) => {
-    //             const todo = {
-    //                 id: doc.id,
-    //                 ...doc.data(),
-    //             };
-    //             tasks.push(todo);
-    //         });
-
-//     });
-//     console.log(tasks);
-//     return tasks;
-// }
 export const makeDone = (task) => {
     var selectedTask = doc(db, "tasks", task.id);
     updateDoc(selectedTask, {
