@@ -1,5 +1,6 @@
 <template>
-  <div class="tab-pane fade show active d-flex flex-wrap justify-content-center" id="pills-all" role="tabpanel">
+  <div class="tab-pane fade show active d-flex flex-wrap justify-content-center" :id="'pills-' + paramater"
+    role="tabpanel">
     <div class="alert alert-warning w-100" role="alert" v-if="allTasks.length <= 0">
       There is no tasks yet.
     </div>
@@ -52,22 +53,25 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { db, makeDone, deleteTask } from "@/firebase";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, where } from "firebase/firestore";
 import EditTask from "./EditTask.vue";
 export default {
   components: {
     EditTask,
   },
-  setup() {
+  props: ["param"],
+
+  setup(props) {
+    const paramater = computed(() => props.param);
     const checked = ref(false);
     const allTasks = ref([]);
     const selectedTask = ref({});
 
-    const getAllTasks =  () => {
-
-      onSnapshot(query(collection(db, "tasks")), (querySnapshot) => {
+    const getAllTasks = () => {
+      //set the query to get tasks for the correct tabs
+      onSnapshot(query(collection(db, "tasks"), paramater.value == "all" ? where("title", "!=", null) : paramater.value == "doned" ? where("isDone", "==", true) : where("isDone", "==", false)), (querySnapshot) => {
         let tasks = [];
         querySnapshot.forEach((doc) => {
           const todo = {
@@ -88,7 +92,7 @@ export default {
       selectedTask.value.tags = tagArry.value
       getAllTasks(); // bcs of keep the tags map like in the begining 
     };
-    
+
     const makeDoneTask = (task) => {
       makeDone(task);
     };
@@ -108,6 +112,7 @@ export default {
       makeDoneTask,
       deleteItem,
       editTask,
+      paramater
     };
   },
 };
