@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { ref } from "vue";
+import {ref,reactive } from "vue";
 
 
 const firebaseConfig = {
@@ -16,11 +16,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-import { collection, addDoc, onSnapshot, doc, updateDoc,deleteDoc  } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc,deleteDoc  } from "firebase/firestore";
 
 
 export const addTask = (task) => {
-        addDoc(collection(db, "tasks"), {
+    return addDoc(collection(db, "tasks"), {
             ...task,
         });
     }
@@ -32,26 +32,18 @@ export const makeDone = (task) => {
 }
 export const deleteTask = (task) => {
     var selectedTask = doc(db, "tasks", task.id);
-    deleteDoc(selectedTask).then(() => {
-        console.log("Document successfully deleted!");
-    })
-    .catch((err) => {
-        console.log(err);
-    });;
+    return  deleteDoc(selectedTask)
 }
+
+
 export const editTask = (task) => {
     var editTask = doc(db, "tasks", task.id);
-    updateDoc(editTask, {
+    return  updateDoc(editTask, {
         title: task.title,
         description: task.description,
         isDone: task.isDone,
         tags: task.tags,
-    }).then(() => {
-        console.log("Document successfully updated!");
     })
-    .catch((err) => {
-        console.log(err);
-    });;
 }
 
 export { db };

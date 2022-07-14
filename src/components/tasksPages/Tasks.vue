@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed ,inject} from "vue";
 import { db, makeDone, deleteTask } from "@/firebase";
 import { collection, query, onSnapshot, where } from "firebase/firestore";
 import EditTask from "./EditTask.vue";
@@ -68,6 +68,7 @@ export default {
     const checked = ref(false);
     const allTasks = ref([]);
     const selectedTask = ref({});
+     const toast = inject("WKToast");
 
     const getAllTasks = () => {
       //set the query to get tasks for the correct tabs
@@ -98,7 +99,13 @@ export default {
     };
 
     const deleteItem = (task) => {
-      deleteTask(task);
+      deleteTask(task).then(() => {
+        toast("Task Deleted" );
+      }).catch(error => {
+         toast(error ,{
+        className: 'wk-alert'
+        });
+      });;
     };
 
     onMounted(() => {

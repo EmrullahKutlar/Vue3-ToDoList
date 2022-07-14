@@ -1,52 +1,23 @@
 <template>
-  <div
-    class="modal fade"
-    id="newTask"
-    tabindex="-1"
-    aria-labelledby="newTaskLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="newTask" tabindex="-1" aria-labelledby="newTaskLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="newTaskLabel">Add New Task</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form class="d-flex flex-column" @submit.prevent="onSubmit()">
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
-                >Task Title</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                aria-describedby="emailHelp"
-                v-model="taskDetails.title"
-              />
+              <label for="exampleInputEmail1" class="form-label">Task Title *</label>
+              <input type="text" class="form-control" aria-describedby="emailHelp" v-model="taskDetails.title" />
             </div>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
-                >Task Description</label
-              >
-              <textarea
-                class="form-control"
-                aria-label="With textarea"
-                v-model="taskDetails.description"
-              ></textarea>
+              <label for="exampleInputEmail1" class="form-label">Task Description *</label>
+              <textarea class="form-control" aria-label="With textarea" v-model="taskDetails.description"></textarea>
             </div>
             <div class="form-check mb-3">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                v-model="taskDetails.isDone"
-                id="isDoneChecked"
-              />
+              <input class="form-check-input" type="checkbox" v-model="taskDetails.isDone" id="isDoneChecked" />
               <label class="form-check-label" for="isDoneChecked">
                 Is Done?
               </label>
@@ -54,24 +25,11 @@
 
             <div class="mb-3">
               <label class="form-check-label" for="isDoneChecked"> Tags </label>
-              <Multiselect
-                v-model="taskDetails.tags"
-                :options="tagsOptions"
-                :close-on-select="true"
-                :searchable="true"
-                :create-option="false"
-                placeholder="Tags"
-                :object="true"
-                mode="tags"
-              />
+              <Multiselect v-model="taskDetails.tags" :options="tagsOptions" :close-on-select="true" :searchable="true"
+                :create-option="false" placeholder="Tags" :object="true" mode="tags" />
             </div>
 
-            <button
-              type="submit"
-              class="btn btn-primary"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
               Submit
             </button>
           </form>
@@ -82,7 +40,7 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
+import { reactive, ref,inject } from "vue";
 import { addTask } from "@/firebase";
 import Multiselect from "@vueform/multiselect";
 export default {
@@ -90,6 +48,8 @@ export default {
     Multiselect,
   },
   setup() {
+     const toast = inject("WKToast");
+
     const taskDetails = reactive({
       title: "",
       description: "",
@@ -103,20 +63,28 @@ export default {
       { key: "List", value: "List", label: "List" },
     ]);
     const onSubmit = async () => {
-      var tagMap = taskDetails.tags.reduce(function (map, obj) {
-        map[obj.key] = obj.value;
-        return map;
-      }, {});
-      taskDetails.tags = tagMap;  // array to map for list correctly handling
-
       if (taskDetails.title.length > 0 && taskDetails.description.length > 0) {
-        addTask({ ...taskDetails });
+        var tagMap = taskDetails.tags.reduce(function (map, obj) {
+          map[obj.key] = obj.value;
+          return map;
+        }, {});
+        taskDetails.tags = tagMap;  // array to map for list correctly handling
+        addTask({ ...taskDetails }).then(() => {
+          toast("Task Added Successfully");
+        }).catch(error => {
+          toast(error,{
+        className: 'wk-alert'
+        });
+        });
         taskDetails.title = "";
         taskDetails.description = "";
         taskDetails.isDone = false;
         taskDetails.tags = [];
       } else {
-        alert("Please fill all the fields");
+        toast("Please Fill All The Fields",{
+        className: 'wk-alert'
+        });
+        taskDetails.tags = [];
       }
     };
 
@@ -129,4 +97,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
