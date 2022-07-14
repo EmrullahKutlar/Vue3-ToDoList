@@ -107,7 +107,8 @@ body {
 }
 .wk-wrapper{
     width:auto !important;
+    background-color: #1fba72 !important;
 }
 .wk-wrapper.wk-alert {
-    background-color: rgb(189 19 19) !important;
+    background-color: rgb(223, 25, 25) !important;
 }

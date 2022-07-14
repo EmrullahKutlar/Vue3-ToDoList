@@ -100,7 +100,7 @@ export default {
 
     const deleteItem = (task) => {
       deleteTask(task).then(() => {
-        toast("Task Deleted" );
+        toast("Task Successfully Deleted" );
       }).catch(error => {
          toast(error ,{
         className: 'wk-alert'

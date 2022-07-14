@@ -70,7 +70,7 @@ export default {
         }, {});
         taskDetails.tags = tagMap;  // array to map for list correctly handling
         addTask({ ...taskDetails }).then(() => {
-          toast("Task Added Successfully");
+          toast("Task Successfully Added ");
         }).catch(error => {
           toast(error,{
         className: 'wk-alert'

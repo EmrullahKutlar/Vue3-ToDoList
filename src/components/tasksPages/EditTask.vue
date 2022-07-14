@@ -70,7 +70,7 @@ export default {
       }
       // we cant change the value of computed variable so we need to create a new one
       editTask(newTask).then(() => {
-        toast("Task updated" );
+        toast("Task Successfully Updated" );
       }).catch(error => {
          toast(error ,{
         className: 'wk-alert'
