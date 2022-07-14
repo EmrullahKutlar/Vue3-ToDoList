@@ -7,6 +7,6 @@ import 'vue3-toast-single/dist/toast.css'
 
 const app = createApp(App);
 
-app.use(Toast, { verticalPosition: "top",horizontalPosition:"center",transition:"transition",closeable:false, duration: 200000 });
+app.use(Toast, { verticalPosition: "top",horizontalPosition:"center",transition:"transition",closeable:false, duration: 2000 });
 // app.use(router);
 app.mount("#app");
