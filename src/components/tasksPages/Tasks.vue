@@ -4,7 +4,7 @@
     <div class="alert alert-warning w-100" role="alert" v-if="allTasks.length <= 0">
       There is no tasks yet.
     </div>
-    <div class="card mb-4 me-3" v-else v-for="(item, index) in allTasks" :key="index">
+    <div class="card mb-4 ms-3 me-3" v-else v-for="(item, index) in allTasks" :key="index">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
           <input type="checkbox" name="" id="" class="check-box" @click="makeDoneTask(item)" :checked="item.isDone" />

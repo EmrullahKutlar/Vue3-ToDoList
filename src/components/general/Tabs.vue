@@ -4,25 +4,24 @@
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all"
           type="button" role="tab" aria-controls="pills-all" aria-selected="true" @click="setQuery('all')">
-          All Tasks
+          ALL
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-active-tab" data-bs-toggle="pill" data-bs-target="#pills-active"
           type="button" role="tab" aria-controls="pills-active" aria-selected="false"
           @click="setQuery('active')">
-          Active
+          ACTIVE
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link me-3" id="pills-doned-tab" data-bs-toggle="pill" data-bs-target="#pills-doned"
           type="button" role="tab" aria-controls="pills-doned" aria-selected="false" @click="setQuery('doned')">
-          Doned
+          DONE
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#newTask">New
-          Task</button>
+        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#newTask">NEW</button>
       </li>
     </ul>
   </div>
