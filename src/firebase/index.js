@@ -1,7 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import {ref,reactive } from "vue";
-
 
 const firebaseConfig = {
     apiKey: "AIzaSyBfkcYR9knX0iJR6LQEuc3PvxJ1E-0L8gM",
@@ -15,6 +13,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 
 import { collection, addDoc, doc, updateDoc,deleteDoc  } from "firebase/firestore";
 
@@ -45,5 +44,4 @@ export const editTask = (task) => {
         tags: task.tags,
     })
 }
-
 export { db };

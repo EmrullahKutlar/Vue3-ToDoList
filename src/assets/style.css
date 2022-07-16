@@ -112,3 +112,14 @@ body {
 .wk-wrapper.wk-alert {
     background-color: rgb(223, 25, 25) !important;
 }
+.form-Header{
+    color: #1ea8e7;
+}
+.card{
+    border: 1px solid rgb(0 0 0 / 0%) !important;
+}
+[data-type="submit"] .formkit-input {
+    width: 100% !important;
+    background:  #1ea8e7 !important;
+    color: var(--fk-color-submit);
+}

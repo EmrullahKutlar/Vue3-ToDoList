@@ -1,6 +1,6 @@
 <template>
   <Header/>
-  <Tabs/>
+  <router-view/>
 </template>
 
 <script>
