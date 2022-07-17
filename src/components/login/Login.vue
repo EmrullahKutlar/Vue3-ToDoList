@@ -51,5 +51,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.card {
+    border-radius: 1.25rem !important;
+    max-width: 400px !important;
+    min-width: 300px
+}
 </style>

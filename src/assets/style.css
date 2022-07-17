@@ -41,11 +41,7 @@ body {
     font-size: 20px;
 }
 
-.card {
-    border-radius: 1.25rem !important;
-    max-width: 400px !important;
-    min-width: 300px
-}
+
 
 
 /*****************************/
@@ -118,8 +114,20 @@ body {
 .card{
     border: 1px solid rgb(0 0 0 / 0%) !important;
 }
+
+/*********************Formkit**********************/
+
 [data-type="submit"] .formkit-input {
     width: 100% !important;
     background:  #1ea8e7 !important;
     color: var(--fk-color-submit);
 }
+[data-invalid] .formkit-inner {
+    border-color: red;
+    box-shadow: 0 0 0 1px red;
+  }
+  
+  [data-complete] .formkit-inner {
+    border-color: red;
+    box-shadow: 0 0 0 1.5px green;
+  }

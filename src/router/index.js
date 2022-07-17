@@ -22,6 +22,22 @@ const routes = [
     component:() =>
     import ('@/views/register/register.vue'),
     
+  },
+  {
+    name: "AccountPage",
+    path: "/account",
+    component:() =>
+    import ('@/views/account/account.vue'),
+    
+  },
+  {
+    name: "PageNotFound",
+    path: "/:pathMatch(.*)",
+    component:  () =>
+    import ('@/views/404/404.vue'),
+    meta: {
+        layout: 'pagenotfound',
+    }
   }
 
  
@@ -35,7 +51,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const AuthenticatedPages = ["HomePage",];
+  const AuthenticatedPages = ["HomePage","AccountPage"];
   const NotAuthenticatedPages = [
     "LoginPage",
     "RegisterPage",
