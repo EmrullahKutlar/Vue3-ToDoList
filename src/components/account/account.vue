@@ -33,14 +33,13 @@
                                 <div class="card d-flex justify-content-center p-3">
                                     <FormKit type="form" id="registration-example"
                                         :form-class="submitted ? 'hide' : 'show'" submit-label="Register"
-                                        @submit="updateGeneral" :actions="false" #default="{ value }">
+                                        @submit="updateGeneral" :actions="false" >
                                         <FormKit type="text" name="name" label="Your name" :disabled="disabled"
                                             :placeholder="user.displayName" validation="" />
 
                                         <FormKit type="text" name="email" label="Your email" :placeholder="user.email"
                                             validation="email" :disabled="disabled" />
                                         <FormKit type="submit" label="Save" :disabled="disabled" />
-                                        <pre wrap>{{ value }}</pre>
                                     </FormKit>
                                 </div>
                             </div>
