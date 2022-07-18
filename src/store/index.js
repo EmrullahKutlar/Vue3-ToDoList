@@ -80,7 +80,7 @@ export default createStore({
       );
       Swal.fire(
         "Success!",
-        "Welcome " + state.user.displayName + "!",
+        "Welcome " + state.user.displayName,
         "success"
       );
       router.push("/");
@@ -120,7 +120,7 @@ export default createStore({
       console.log("state user", state.user);
       Swal.fire(
         "Success!",
-        "Welcome " + state.user.displayName + "!",
+        "Welcome " + state.user.displayName,
         "success"
       );
       router.push("/");
