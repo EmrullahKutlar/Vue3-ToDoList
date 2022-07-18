@@ -13,6 +13,7 @@ import {
   updateProfile,
   updateEmail,
   updatePassword,
+  sendPasswordResetEmail 
 } from "firebase/auth";
 const auth = getAuth();
 const ls = new SecureLS({
@@ -159,6 +160,20 @@ export default createStore({
           Swal.fire(
             "Success!",
             "Password updated",
+            "success"
+          );
+        })
+        .catch((error) => {
+          Swal.fire("Soryy!", error.message, "error");
+        });
+    },
+    async sendPasswordReset({ commit }, formValue) {
+      var email = formValue.email;
+      await sendPasswordResetEmail(auth,email)
+        .then(() => {
+          Swal.fire(
+            "Success!",
+            "Password reset email sent. Check your email (If you cant see it, check your spam folder)",
             "success"
           );
         })

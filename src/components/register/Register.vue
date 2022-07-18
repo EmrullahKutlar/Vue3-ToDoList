@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="card d-flex justify-content-center p-3">
                 <FormKit type="form" id="Register" :form-class="submitted ? 'hide' : 'show'" submit-label="Register"
-                    @submit="submitHandler" :actions="false" >
+                    @submit="submitRegister" :actions="false" >
                     <h3 class="text-center fs-2 fw-bold form-Header">Register</h3>
                     <FormKit type="text" name="displayName" label="Your name" placeholder="Emrullah Kutlar"
                         validation="required" />
@@ -43,7 +43,7 @@ export default {
         const submitted = ref(false)
         const store = useStore()
 
-        const submitHandler = async (formValue) => {
+        const submitRegister = async (formValue) => {
             // Let's pretend this is an ajax request:
             await new Promise((r) => setTimeout(r, 1000))
             console.log(formValue);
@@ -52,7 +52,7 @@ export default {
         }
         return {
             submitted,
-            submitHandler
+            submitRegister
         }
     }
 
@@ -60,6 +60,10 @@ export default {
 
 
 </script>
-
-<style>
+<style scoped>
+.card {
+    border-radius: 1.25rem !important;
+    max-width: 400px !important;
+    min-width: 300px
+}
 </style>

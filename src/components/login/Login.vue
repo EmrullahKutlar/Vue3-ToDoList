@@ -12,7 +12,7 @@
 
           <FormKit type="submit" label="Login" />
         </FormKit>
-        <p role="button" class="fs-6 text-danger">
+        <p role="button" class="fs-6 text-danger" data-bs-toggle="modal" data-bs-target="#forgotPassword">
           Forgot password?
         </p>
         <p>
@@ -24,14 +24,18 @@
       </div>
     </div>
   </div>
-
+<ForgotPassword/>
 </template>
 
 <script >
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import ForgotPassword from '../forgotPass/ForgotPassword.vue'
 
 export default {
+  components: {
+    ForgotPassword
+  },
   setup() {
     const store = useStore()
     const submitted = ref(false)
