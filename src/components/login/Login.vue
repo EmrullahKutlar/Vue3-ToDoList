@@ -5,10 +5,10 @@
         <FormKit type="form" id="Login" :form-class="submitted ? 'hide' : 'show'" submit-label="Login"
           @submit="submitHandler" :actions="false">
           <h3 class="text-center fs-2 fw-bold form-Header">Login</h3>
-          <FormKit type="text" name="email" label="Your email" placeholder="jane@example.com"
+          <FormKit type="text" name="email" label="Your email" placeholder="E-mail@example.com"
             validation="required|email" />
           <FormKit type="password" name="password" label="Password" validation="required|length:6"
-            placeholder="Your password" />
+            placeholder="Your Password" />
 
           <FormKit type="submit" label="Login" />
         </FormKit>
@@ -16,7 +16,7 @@
           Forgot password?
         </p>
         <p>
-          Dont have an account?
+          Don't have an account?
           <span role="button" class="form-Header fs-6" @click="$router.push('/register')">
             Register
           </span>

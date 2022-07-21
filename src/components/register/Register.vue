@@ -3,17 +3,17 @@
         <div class="row justify-content-center">
             <div class="card d-flex justify-content-center p-3">
                 <FormKit type="form" id="Register" :form-class="submitted ? 'hide' : 'show'" submit-label="Register"
-                    @submit="submitRegister" :actions="false" >
+                    @submit="submitRegister" :actions="false">
                     <h3 class="text-center fs-2 fw-bold form-Header">Register</h3>
                     <FormKit type="text" name="displayName" label="Your name" placeholder="Emrullah Kutlar"
                         validation="required" />
-                    <FormKit type="text" name="email" label="Your email" placeholder="jane@example.com"
+                    <FormKit type="text" name="email" label="Your email" placeholder="E-mail@example.com"
                         validation="required|email" />
                     <div class="double">
                         <FormKit type="password" name="password" label="Password" validation="required|length:6"
-                            placeholder="Your password" />
+                            placeholder="Your Password" />
                         <FormKit type="password" name="password_confirm" label="Confirm password"
-                            placeholder="Confirm password" validation="required|confirm" />
+                            placeholder="Confirm Password" validation="required|confirm" />
                     </div>
 
                     <FormKit type="submit" label="Register" />
@@ -24,14 +24,9 @@
                         Login
                     </span>
                 </p>
-
             </div>
-
-
-
         </div>
     </div>
-
 </template>
 
 <script>
