@@ -9,6 +9,8 @@ import {
   remove,
 } from "firebase/database";
 import store from "../index";
+import { useToast } from 'vue-toastification'
+const toast = useToast()
 const db = getDatabase();
 
 const tasks = {
@@ -26,7 +28,7 @@ const tasks = {
     },
     clearTasks: (state) => {
       state.tasks = [];
-    }
+    },
   },
   actions: {
     getTasks({ commit, state }, parameter) {
@@ -59,10 +61,7 @@ const tasks = {
     },
     updateTasks({ commit, state }, formValue) {
       set(
-        ref(
-          db,
-          "users/" + store.getters.getUserId + "/tasks/" + formValue.id
-        ),
+        ref(db, "users/" + store.getters.getUserId + "/tasks/" + formValue.id),
         {
           description: formValue.description,
           id: formValue.id,
@@ -71,7 +70,12 @@ const tasks = {
           isDone: formValue.isDone,
         },
         { merge: true }
-      );
+      ).then(() => {
+        toast.success("Task updated successfully")
+      })
+      .catch((error) => {
+        toast.error(error.message)
+      });
     },
     addTask({ commit, state }, formValue) {
       const newPostKey = push(
@@ -88,10 +92,21 @@ const tasks = {
       const updates = {};
       updates["users/" + store.getters.getUserId + "/tasks/" + newPostKey] =
         newTask;
-      return update(ref(db), updates);
+       update(ref(db), updates).then(() => {
+        toast.success("Task added successfully")
+      })
+      .catch((error) => {
+        toast.error(error.message)
+      });;
     },
-    removeTask({ commit,  dispatch }, task) {
-      remove(ref(db, "users/" + store.getters.getUserId + "/tasks/" + task.id));
+    removeTask({ commit, dispatch }, task) {
+      remove(ref(db, "users/" + store.getters.getUserId + "/tasks/" + task.id))
+        .then(() => {
+          toast.success("Task removed")
+        })
+        .catch((error) => {
+          toast.error(error.message)
+        });
     },
     registerData({ commit }) {
       set(ref(db, "users/" + store.getters.getUserId + "/tasks/"), {
@@ -106,17 +121,17 @@ const tasks = {
         Object.values(data).forEach((element) => {
           if (
             element.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-            element.description.toLowerCase().includes(searchValue.toLowerCase()) 
+            element.description
+              .toLowerCase()
+              .includes(searchValue.toLowerCase())
           ) {
             filteredTasks.push(element);
           }
-        }
-        );
+        });
         state.tasks = filteredTasks;
         commit("setTasks", filteredTasks);
-      }
-      );
-    }
+      });
+    },
   },
 };
 export default tasks;

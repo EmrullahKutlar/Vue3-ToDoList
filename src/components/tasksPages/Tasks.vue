@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, inject } from "vue";
+import { ref, onMounted, computed } from "vue";
 import EditTask from "./EditTask.vue";
 import { useStore } from "vuex";
 export default {
@@ -68,7 +68,6 @@ export default {
     const checked = ref(false);
     const allTasks = computed(() => store.getters.getTasks);
     const selectedTask = ref({});
-    const toast = inject("WKToast");
     const store = useStore();
 
     const getAllTasks = () => {

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { computed, ref, inject } from "vue";
+import { computed, ref } from "vue";
 import Multiselect from "@vueform/multiselect";
 import { useStore } from "vuex";
 
@@ -53,7 +53,6 @@ export default {
   setup(props) {
     const Task = computed(() => props.task);
     const paramater = computed(() => props.param);
-    const toast = inject("WKToast");
     const store = useStore();
 
 

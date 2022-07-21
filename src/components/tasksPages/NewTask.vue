@@ -40,17 +40,17 @@
 </template>
 
 <script>
-import { reactive, ref,inject } from "vue";
+import { reactive, ref } from "vue";
 import Multiselect from "@vueform/multiselect";
 import { useStore } from "vuex";
+import { useToast } from 'vue-toastification'
 export default {
   components: {
     Multiselect,
   },
   setup() {
-     const toast = inject("WKToast");
     const store = useStore();
-
+const toast = useToast()
     const taskDetails = reactive({
       title: "",
       description: "",
@@ -77,9 +77,7 @@ export default {
         taskDetails.tags = [];
         
       } else {
-        toast("Please Fill All The Fields",{
-        className: 'wk-alert'
-        });
+        toast.error("Please Fill All The Fields");
         taskDetails.tags = [];
       }
     };

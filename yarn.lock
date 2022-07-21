@@ -1274,10 +1274,10 @@ vue-router@4:
   dependencies:
     "@vue/devtools-api" "^6.1.4"
 
-vue3-toast-single@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/vue3-toast-single/-/vue3-toast-single-1.0.2.tgz#7f64260baa65a97a91c2c10d1ac7821b7c30c0e4"
-  integrity sha512-4pxwILOd4rCuYVzxUbY5RdmsDodfz8vpBXLROu4hgFvIBUFAHorTZE7kml4FgmRuBERB+L/HqqACZkCEa31EkA==
+vue-toastification@^2.0.0-rc.5:
+  version "2.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/vue-toastification/-/vue-toastification-2.0.0-rc.5.tgz#92798604d806ae473cfb76ed776fae294280f8f8"
+  integrity sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==
 
 vue@^3.2.25:
   version "3.2.37"

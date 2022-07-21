@@ -3,14 +3,29 @@ import App from "./App.vue";
 import "@vueform/multiselect/themes/default.css"
 import router from "./router";
 import store from "./store";
-import Toast from 'vue3-toast-single'
-import 'vue3-toast-single/dist/toast.css'
 import { plugin, defaultConfig } from '@formkit/vue'
 import '@formkit/themes/genesis'
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
+const options = {
+  position: "top-right",
+  timeout: 1750,
+  closeOnClick: true,
+  pauseOnFocusLoss: true,
+  pauseOnHover: true,
+  draggable: true,
+  draggablePercent: 0.6,
+  showCloseButtonOnHover: false,
+  hideProgressBar: true,
+  closeButton: "button",
+  icon: true,
+  rtl: false
+}
 
 const app = createApp(App);
 
-app.use(Toast, { verticalPosition: "top",horizontalPosition:"center",transition:"transition",closeable:false, duration: 1000 });
+app.use(Toast, options);
 app.use(router);
 app.use(store);
 app.use(plugin, defaultConfig)
