@@ -98,6 +98,25 @@ const tasks = {
         merge: true,
       });
     },
+    searchTasks({ commit, state }, searchValue) {
+      const tasksRef = ref(db, "users/" + store.getters.getUserId + "/tasks");
+      onValue(tasksRef, (snapshot) => {
+        const data = snapshot.val();
+        let filteredTasks = [];
+        Object.values(data).forEach((element) => {
+          if (
+            element.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+            element.description.toLowerCase().includes(searchValue.toLowerCase()) 
+          ) {
+            filteredTasks.push(element);
+          }
+        }
+        );
+        state.tasks = filteredTasks;
+        commit("setTasks", filteredTasks);
+      }
+      );
+    }
   },
 };
 export default tasks;

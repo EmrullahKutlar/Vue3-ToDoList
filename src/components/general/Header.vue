@@ -21,7 +21,10 @@
       </div>
       <div class="space" v-if="!$store.getters.isAuthenticated"></div>
     </nav>
+   
+    
   </div>
+  
 </template>
 
 <script>
