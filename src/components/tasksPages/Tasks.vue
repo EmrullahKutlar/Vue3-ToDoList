@@ -75,14 +75,16 @@ export default {
     };
     const makeDoneTask = (task) => {
       task.isDone = !task.isDone;
-      store.dispatch("updateTasks", task);
-      getAllTasks(); //for fetch new data from firebase
+      setTimeout(() => {
+        store.dispatch("updateTasks", task);
+      }, 300);
 
     };
 
     const deleteItem=(item)=>{
+      setTimeout(() => {
       store.dispatch("removeTask", item);
-      // getAllTasks(); //for fetch new data from firebase
+      }, 300);
     }
     const editTask = (e) => {
        const tagArry = ref([]);
@@ -91,7 +93,7 @@ export default {
       } //for multiselect component to work. Changing obj to array
       selectedTask.value = e;
       selectedTask.value.tags = tagArry.value
-      getAllTasks(); //for fetch new data from firebase
+      getAllTasks(); //for fix the tags bug
     };
     onMounted(() => {
       getAllTasks();

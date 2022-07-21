@@ -127,6 +127,10 @@ body {
     background-color: #1ea8e7;
 
 }
+.btn-primary:hover{
+    background-color: #1a92c9;
+
+}
 /*********************Formkit**********************/
 
 [data-type="submit"] .formkit-input {
