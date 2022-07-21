@@ -74,10 +74,10 @@ export default {
       store.dispatch("getTasks", paramater);
     };
     const makeDoneTask = (task) => {
-      task.isDone = !task.isDone;
       setTimeout(() => {
+        task.isDone = !task.isDone;
         store.dispatch("updateTasks", task);
-      }, 300);
+      }, 200);
 
     };
 
