@@ -42,7 +42,6 @@ export default {
     const submitHandler = async (loginForm) => {
       // Let's pretend this is an ajax request:
       await new Promise((r) => setTimeout(r, 1000))
-      console.log(loginForm);
       store.dispatch('login', loginForm)
       submitted.value = true
     }

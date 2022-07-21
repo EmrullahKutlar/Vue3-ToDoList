@@ -46,7 +46,6 @@ export default {
         const submitRegister = async (formValue) => {
             // Let's pretend this is an ajax request:
             await new Promise((r) => setTimeout(r, 1000))
-            console.log(formValue);
             store.dispatch('register', formValue)
             submitted.value = true
         }

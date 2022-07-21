@@ -7,7 +7,8 @@
     <div class="card mb-4 ms-3 me-3" v-else v-for="(item, index) in allTasks" :key="index">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-          <input type="checkbox" name="" id="" class="check-box" @click="makeDoneTask(item)" :checked="item.isDone" />
+          <input type="checkbox" name="" id="" class="check-box" @click="makeDoneTask(item, index)"
+            :checked="item.isDone" />
           <h5 class="card-title d-flex justify-content-between">
             <span class="title-color" :class="{ completed: item.isDone }">({{ index + 1 }}) - {{ item.title }}</span>
           </h5>
@@ -27,7 +28,7 @@
           </div>
         </div>
         <hr />
-        <div class="card-bottom" @click="makeDoneTask(item)">
+        <div class="card-bottom" @click="makeDoneTask(item, index)">
           <p class="card-text" :class="{ completed: item.isDone }">
             {{ item.description }}
           </p>
@@ -49,14 +50,13 @@
       </div>
     </div>
   </div>
-  <edit-task :task="selectedTask"></edit-task>
+  <edit-task :task="selectedTask" :param="paramater"></edit-task>
 </template>
 
 <script>
-import { ref, onMounted, computed ,inject} from "vue";
-import { db, makeDone, deleteTask } from "@/firebase";
-import { collection, query, onSnapshot, where } from "firebase/firestore";
+import { ref, onMounted, computed, inject } from "vue";
 import EditTask from "./EditTask.vue";
+import { useStore } from "vuex";
 export default {
   components: {
     EditTask,
@@ -66,48 +66,34 @@ export default {
   setup(props) {
     const paramater = computed(() => props.param);
     const checked = ref(false);
-    const allTasks = ref([]);
+    const allTasks = computed(() => store.getters.getTasks);
     const selectedTask = ref({});
-     const toast = inject("WKToast");
+    const toast = inject("WKToast");
+    const store = useStore();
 
     const getAllTasks = () => {
-      //set the query to get tasks for the correct tabs
-      onSnapshot(query(collection(db, "tasks"), paramater.value == "all" ? where("title", "!=", null) : paramater.value == "doned" ? where("isDone", "==", true) : where("isDone", "==", false)), (querySnapshot) => {
-        let tasks = [];
-        querySnapshot.forEach((doc) => {
-          const todo = {
-            id: doc.id,
-            ...doc.data(),
-          };
-          tasks.push(todo);
-        });
-        allTasks.value = tasks;
-      });
+      store.dispatch("getTasks", paramater);
     };
+    const makeDoneTask = (task) => {
+      task.isDone = !task.isDone;
+      store.dispatch("updateTasks", task);
+      getAllTasks(); //for fetch new data from firebase
+
+    };
+
+    const deleteItem=(item)=>{
+      store.dispatch("removeTask", item);
+      // getAllTasks(); //for fetch new data from firebase
+    }
     const editTask = (e) => {
-      const tagArry = ref([]);
+       const tagArry = ref([]);
       for (const [key, value] of Object.entries(e.tags)) {
         tagArry.value.push({ key, value, label: key });
       } //for multiselect component to work. Changing obj to array
       selectedTask.value = e;
       selectedTask.value.tags = tagArry.value
-      getAllTasks(); // bcs of keep the tags map like in the begining 
+      getAllTasks(); //for fetch new data from firebase
     };
-
-    const makeDoneTask = (task) => {
-      makeDone(task);
-    };
-
-    const deleteItem = (task) => {
-      deleteTask(task).then(() => {
-        toast("Task Successfully Deleted" );
-      }).catch(error => {
-         toast(error ,{
-        className: 'wk-alert'
-        });
-      });;
-    };
-
     onMounted(() => {
       getAllTasks();
     });
@@ -116,10 +102,10 @@ export default {
       checked,
       allTasks,
       selectedTask,
+      paramater,
       makeDoneTask,
       deleteItem,
       editTask,
-      paramater
     };
   },
 };
@@ -127,8 +113,8 @@ export default {
 
 <style scoped>
 .card {
-    border-radius: 1.25rem !important;
-    max-width: 400px !important;
-    min-width: 300px
+  border-radius: 1.25rem !important;
+  max-width: 400px !important;
+  min-width: 300px
 }
 </style>

@@ -41,18 +41,20 @@
 
 <script>
 import { computed, ref, inject } from "vue";
-import { editTask } from "@/firebase";
 import Multiselect from "@vueform/multiselect";
+import { useStore } from "vuex";
 
 export default {
-  props: ["task"],
+  props: ["task","param"],
   components: {
     Multiselect,
   },
 
   setup(props) {
     const Task = computed(() => props.task);
+    const paramater = computed(() => props.param);
     const toast = inject("WKToast");
+    const store = useStore();
 
 
     const onSubmit = () => {
@@ -69,13 +71,9 @@ export default {
         tags: tagMap,
       }
       // we cant change the value of computed variable so we need to create a new one
-      editTask(newTask).then(() => {
-        toast("Task Successfully Updated" );
-      }).catch(error => {
-         toast(error ,{
-        className: 'wk-alert'
-        });
-      });
+        store.dispatch("updateTasks", newTask);
+        store.dispatch("getTasks", paramater);
+
     };
 
     const tagsOptions = ref([

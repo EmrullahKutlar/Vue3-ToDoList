@@ -41,14 +41,15 @@
 
 <script>
 import { reactive, ref,inject } from "vue";
-import { addTask } from "@/firebase";
 import Multiselect from "@vueform/multiselect";
+import { useStore } from "vuex";
 export default {
   components: {
     Multiselect,
   },
   setup() {
      const toast = inject("WKToast");
+    const store = useStore();
 
     const taskDetails = reactive({
       title: "",
@@ -69,17 +70,12 @@ export default {
           return map;
         }, {});
         taskDetails.tags = tagMap;  // array to map for list correctly handling
-        addTask({ ...taskDetails }).then(() => {
-          toast("Task Successfully Added ");
-        }).catch(error => {
-          toast(error,{
-        className: 'wk-alert'
-        });
-        });
+        store.dispatch("addTask", taskDetails);
         taskDetails.title = "";
         taskDetails.description = "";
         taskDetails.isDone = false;
         taskDetails.tags = [];
+        
       } else {
         toast("Please Fill All The Fields",{
         className: 'wk-alert'

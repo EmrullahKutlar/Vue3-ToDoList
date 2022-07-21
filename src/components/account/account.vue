@@ -85,20 +85,17 @@ export default {
             // Let's pretend this is an ajax request:
             await new Promise((r) => setTimeout(r, 1000))
             submitted.value = true
-            console.log(formValue);
             store.dispatch('updateProfile', formValue)
         }
         const updatePassword = async (formValue) => {
             // Let's pretend this is an ajax request:
             await new Promise((r) => setTimeout(r, 1000))
             submitted.value = true
-            console.log(formValue);
              store.dispatch('changePassword', formValue)
            
         }
 
         onMounted(() => {
-            console.log(store.getters.getUser);
         })
         return {
             user,

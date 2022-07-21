@@ -32,7 +32,6 @@ setup() {
     const sumbitPassForgot = async (forgotPassForm) => {
       // Let's pretend this is an ajax request:
       await new Promise((r) => setTimeout(r, 1000))
-      console.log(forgotPassForm);
       store.dispatch('sendPasswordReset', forgotPassForm)
       submitted.value = true
     }
